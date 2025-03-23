@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -28,16 +25,20 @@ public class TestTicketManager {
 
     @Test
     @DisplayName("validate if input city is empty")
-    public void testChooseAndBuyTicketWithEmptyCity(){
+    public void testChooseAndBuyTicketWithEmptyCity() throws Exception {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        try {
-            ticketManager.chooseAndBuyTicket(inputStr, inputStr);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         inputStr = "";
-        assertEquals("No flights to  found.", outContent.toString());
+        ticketManager.chooseAndBuyTicket(inputStr, inputStr);
+        String expectedOutput = "No direct flights found. Searching for connecting flights...\nNo flights to  found.";
+        assertEquals(expectedOutput, outContent.toString().trim());
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
     }
+
+    @Test
+    @DisplayName("")
+    public void testChooseAndBuyTicket(){
+
+    }
+
 }

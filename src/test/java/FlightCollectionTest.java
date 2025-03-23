@@ -17,7 +17,7 @@ public class FlightCollectionTest {
 
     private FlightCollection flightCollection;
     private String inputStr;
-//    private int inputNum
+    private int inputNum;
 
     @BeforeEach
     public void setup(){
@@ -25,16 +25,26 @@ public class FlightCollectionTest {
     }
 
     @Test
-    @DisplayName("validate if the flight exists")
-    public void testGetFlightInfoByID(){
+    @DisplayName("validate if the flight ID is not found")
+    public void testGetFlightInfoByIDWithUnmachedID(){
         LocalDateTime dateFrom = LocalDateTime.of(2025, 3, 22, 11, 2, 0, 0);
         LocalDateTime dateTo = LocalDateTime.of(2025, 3, 22, 12, 1, 0, 0);
         Timestamp timestampFrom = Timestamp.valueOf(dateFrom);
         Timestamp timestampTo = Timestamp.valueOf(dateTo);
         Airplane airplane = new Airplane(1, "A", 1,2,3);
         Flight flight = new Flight(123, "Melbourne", "Sydney", "MS1234", "JetStar", timestampFrom, timestampTo, airplane);
-        assertEquals(123, flightCollection.getFlightInfoById(123));
+        assertEquals(null, flightCollection.getFlightInfoById(321));
     }
+
+    @Test
+    @DisplayName("validate if the flight is null")
+    public void testGetFlightInfoByIDWithFlightValueIsNull(){
+        Flight flight = new Flight();
+        flight = null;
+        assertEquals(null, flightCollection.getFlightInfoById(123));
+    }
+
+
 
 
 }
