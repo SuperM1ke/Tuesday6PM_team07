@@ -190,7 +190,7 @@ public class TicketManager {
 
     public void buyDirectTicket(int ticketId) throws Exception {
         // Get ticket info
-        Ticket selectedTicket = TicketCollection.getTicketInfo(ticketId);
+        Ticket selectedTicket = TicketCollection.getTicketInfoById(ticketId);
 
         // Validate ticket
         if (selectedTicket == null) {
@@ -200,7 +200,7 @@ public class TicketManager {
 
         // Get flight info
         int flightId = selectedTicket.getFlight().getFlightID();
-        Flight flight = FlightCollection.getFlightInfo(flightId);
+        Flight flight = FlightCollection.getFlightInfoById(flightId);
 
         if (flight == null) {
             System.out.println("Flight information not found.");
@@ -256,8 +256,8 @@ public class TicketManager {
 
     public void buyConnectingTickets(int firstTicketId, int secondTicketId) throws Exception {
         // Get tickets info
-        Ticket firstTicket = TicketCollection.getTicketInfo(firstTicketId);
-        Ticket secondTicket = TicketCollection.getTicketInfo(secondTicketId);
+        Ticket firstTicket = TicketCollection.getTicketInfoById(firstTicketId);
+        Ticket secondTicket = TicketCollection.getTicketInfoById(secondTicketId);
 
         // Validate tickets
         if (firstTicket == null || secondTicket == null) {
@@ -269,8 +269,8 @@ public class TicketManager {
         int firstFlightId = firstTicket.getFlight().getFlightID();
         int secondFlightId = secondTicket.getFlight().getFlightID();
 
-        Flight firstFlight = FlightCollection.getFlightInfo(firstFlightId);
-        Flight secondFlight = FlightCollection.getFlightInfo(secondFlightId);
+        Flight firstFlight = FlightCollection.getFlightInfoById(firstFlightId);
+        Flight secondFlight = FlightCollection.getFlightInfoById(secondFlightId);
 
         if (firstFlight == null || secondFlight == null) {
             System.out.println("Flight information not found for one or both flights.");

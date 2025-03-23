@@ -17,7 +17,7 @@ public class ChooseTicket{
 
         //search for direct flight from city1 to city2
         
-        flight = FlightCollection.getFlightInfo(city1, city2);
+        flight = FlightCollection.getFlightInfoById(city1, city2);
         
         
         if(flight != null) {
@@ -46,7 +46,7 @@ public class ChooseTicket{
         	
         	//SELECT * from flight where depart_to = '" + connectCity + "' and depart_from = '" + city1+"'"
         	
-        	Flight flightConnectingTwoCities = FlightCollection.getFlightInfo(city1, connectCity);
+        	Flight flightConnectingTwoCities = FlightCollection.getFlightInfoById(city1, connectCity);
         	
         	if(flightConnectingTwoCities != null){
         		

@@ -17,11 +17,25 @@ public class TicketCollection {
 	public static void getAllTickets() {
     	//display all available tickets from the Ticket collection
     }
-	public static Ticket getTicketInfo(int ticket_id) {
-    	//SELECT a ticket where ticket id = ticket_id
-    	return null;
+	public static Ticket getTicketInfoById(int ticket_id) {
+		// Method to find a ticket with a specific ticket ID
+		// SELECT a ticket where ticket id = ticket_id
 
-    }
+		// Check for null/empty collection
+		if (tickets == null || tickets.isEmpty()) {
+			return null;
+		}
+
+		// Search for the ticket with the matching ID
+		for (Ticket ticket : tickets) {
+			if (ticket.getTicket_id() == ticket_id) {
+				return ticket; // Return the ticket if ID matches
+			}
+		}
+
+		// No ticket found with this ID
+		return null;
+	}
 	public static ArrayList<Ticket> getTicketsForFlight(int flight_id) {
 		if (tickets == null) {
 			return null;

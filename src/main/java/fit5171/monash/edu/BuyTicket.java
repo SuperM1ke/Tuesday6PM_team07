@@ -1,9 +1,6 @@
 package fit5171.monash.edu;
 
-import java.sql.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class BuyTicket <T>
@@ -39,7 +36,7 @@ public class BuyTicket <T>
         int flight_id = 0;
 
         //select ticket where ticket_id="+ticket_id"
-        Ticket validTicket = TicketCollection.getTicketInfo(ticket_id);
+        Ticket validTicket = TicketCollection.getTicketInfoById(ticket_id);
        
         //if there is a valid ticket id was input then we buy it, otherwise show message
         if(validTicket != null)
@@ -92,13 +89,13 @@ public class BuyTicket <T>
                 } else
                 {
                 	
-	                   flight = FlightCollection.getFlightInfo(flight_id);
+	                   flight = FlightCollection.getFlightInfoById(flight_id);
 	                	
 	                	int airplane_id = flight.getAirplane().getAirplaneID();
 	                	
 	                    Airplane airplane = Airplane.getAirPlaneInfo(airplane_id);
 	                 
-	                    ticket = TicketCollection.getTicketInfo(ticket_id);
+	                    ticket = TicketCollection.getTicketInfoById(ticket_id);
 	                    
 	                	ticket.setPassenger(passenger);
 	                    ticket.setTicket_id(ticket_id);
@@ -143,9 +140,9 @@ public class BuyTicket <T>
    
         System.out.println(ticket_id_first + " " + ticket_id_second);
         
-        Ticket validTicketfirst = TicketCollection.getTicketInfo(ticket_id_first);
+        Ticket validTicketfirst = TicketCollection.getTicketInfoById(ticket_id_first);
         
-        Ticket validTicketSecond = TicketCollection.getTicketInfo(ticket_id_first);
+        Ticket validTicketSecond = TicketCollection.getTicketInfoById(ticket_id_first);
         
       
         System.out.println("Processing...");
@@ -207,21 +204,21 @@ public class BuyTicket <T>
                 {
                     
                   //  "select * from flight, airplane where flight_id=" + flight_id_first + " and flight.airplane_id=airplane.airplane_id");
-                    Flight flight_first = FlightCollection.getFlightInfo(flight_id_first);
+                    Flight flight_first = FlightCollection.getFlightInfoById(flight_id_first);
                 	
                 	int airplane_id_first = flight_first.getAirplane().getAirplaneID();
                 	
                     Airplane airplane_first = Airplane.getAirPlaneInfo(airplane_id_first);
                  
-                    Flight flight_second = FlightCollection.getFlightInfo(flight_id_second);
+                    Flight flight_second = FlightCollection.getFlightInfoById(flight_id_second);
                 	
                 	int airplane_id_second = flight_second.getAirplane().getAirplaneID();
                 	
                     Airplane airpairplane_second  = Airplane.getAirPlaneInfo(airplane_id_second);
                  
-                    Ticket ticket_first = TicketCollection.getTicketInfo(ticket_id_first);
+                    Ticket ticket_first = TicketCollection.getTicketInfoById(ticket_id_first);
                     
-                    Ticket ticket_second = TicketCollection.getTicketInfo(ticket_id_second);
+                    Ticket ticket_second = TicketCollection.getTicketInfoById(ticket_id_second);
     	             
                     ticket_first.setPassenger(passenger);
                     ticket_first.setTicket_id(ticket_id_first);
