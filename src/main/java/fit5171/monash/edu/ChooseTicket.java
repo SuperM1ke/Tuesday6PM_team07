@@ -1,6 +1,4 @@
 package fit5171.monash.edu;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ChooseTicket{
@@ -40,7 +38,7 @@ public class ChooseTicket{
         {
         	//SELECT a flight where depart_to = city2
         	
-        	Flight depart_to = FlightCollection.getFlightInfo(city2);
+        	Flight depart_to = FlightCollection.getFlightToCIty(city2);
         	
         	//and search for city with depart_from as connector city
 

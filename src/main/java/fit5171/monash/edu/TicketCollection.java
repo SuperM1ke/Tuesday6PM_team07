@@ -22,6 +22,21 @@ public class TicketCollection {
     	return null;
 
     }
+	public static ArrayList<Ticket> getTicketsForFlight(int flight_id) {
+		if (tickets == null) {
+			return null;
+		}
+
+		ArrayList<Ticket> flightTickets = new ArrayList<>();
+
+		for (Ticket ticket : tickets) {
+			if (ticket.getFlight().getFlightID() == flight_id && !ticket.ticketStatus()) {
+				flightTickets.add(ticket);
+			}
+		}
+
+		return flightTickets.isEmpty() ? null : flightTickets;
+	}
 	
 
 }

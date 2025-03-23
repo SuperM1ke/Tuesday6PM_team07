@@ -18,12 +18,27 @@ public class FlightCollection {
     	//display the flights where there is a direct flight from city 1 to city2
     	return null;
     }
-    
-    public static Flight getFlightInfo(String city) {
-    	//SELECT a flight where depart_to = city
-    	return null;
 
-    }
+	public static ArrayList<Flight> getFlightsToCity(String city) {
+		// Method to get all flights arriving at the specified city
+		// SELECT * from flight where depart_to = city
+
+		ArrayList<Flight> flightsToCity = new ArrayList<>();
+
+		// Check for null/empty collection
+		if (flights == null || flights.isEmpty()) {
+			return flightsToCity; // Return empty list
+		}
+
+		// Filter flights arriving at the specified city
+		for (Flight flight : flights) {
+			if (flight.getDepartTo().equalsIgnoreCase(city)) {
+				flightsToCity.add(flight);
+			}
+		}
+
+		return flightsToCity;
+	}
     public static Flight getFlightInfo(int flight_id) {
     	//SELECT a flight with a particular flight id
     	return null;
