@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,7 +17,7 @@ public class FlightCollectionTest {
 
     private FlightCollection flightCollection;
     private String inputStr;
-    private int inputNum
+//    private int inputNum
 
     @BeforeEach
     public void setup(){
@@ -28,9 +31,10 @@ public class FlightCollectionTest {
         LocalDateTime dateTo = LocalDateTime.of(2025, 3, 22, 12, 1, 0, 0);
         Timestamp timestampFrom = Timestamp.valueOf(dateFrom);
         Timestamp timestampTo = Timestamp.valueOf(dateTo);
-        Airplane airplane = new Airplane();
+        Airplane airplane = new Airplane(1, "A", 1,2,3);
         Flight flight = new Flight(123, "Melbourne", "Sydney", "MS1234", "JetStar", timestampFrom, timestampTo, airplane);
         assertEquals(123, flightCollection.getFlightInfoById(123));
     }
+
 
 }
