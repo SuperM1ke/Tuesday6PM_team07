@@ -59,11 +59,5 @@ public class TicketManagerTest {
         assertTrue(output.contains("No direct flights found"),
                 "Expected output to contain 'No direct flights found' but was: " + output);
     }
-
-
-    @org.junit.jupiter.api.AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setIn(System.in); // Restore original System.in
-    }
 }
+
