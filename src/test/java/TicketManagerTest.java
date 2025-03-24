@@ -31,8 +31,7 @@ public class TicketManagerTest {
         ticketManager.showTicket();
 
         String output = outputStream.toString();
-        assertTrue(output.contains("No ticket information available."),
-                "Expected output to contain 'No ticket information available.' but was: " + output);
+        assertTrue(output.contains("No ticket information available."));
     }
 
     @Test
@@ -45,8 +44,18 @@ public class TicketManagerTest {
         ticketManager.chooseAndBuyTicket("Melbourne", "Sydney");
 
         String output = outputStream.toString();
-        assertTrue(output.contains("No direct flights found"),
-                "Expected output to contain 'No direct flights found' but was: " + output);
+        assertTrue(output.contains("No direct flights found"));
+    }
+
+    @Test
+    @DisplayName("Test buyDirectTicket with non-existent ticket ID")
+    public void testBuyDirectTicketWithNonExistentTicket() throws Exception {
+
+        TicketCollection.tickets = new ArrayList<>();
+
+        ticketManager.buyDirectTicket(999);
+        String output = outputStream.toString();
+        assertTrue(output.contains("This ticket does not exist"));
     }
 }
 
