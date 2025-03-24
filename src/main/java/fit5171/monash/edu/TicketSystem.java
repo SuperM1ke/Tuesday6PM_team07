@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
-public class TicketManager {
+public class TicketSystem {
         private Passenger passenger;
         private Ticket ticket;
         private Flight flight;
         private Scanner in;
 
-    public TicketManager() {
+    public TicketSystem() {
         passenger = new Passenger();
         ticket = new Ticket();
         flight = new Flight();
