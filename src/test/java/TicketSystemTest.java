@@ -11,14 +11,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TicketManagerTest {
+public class TicketSystemTest {
 
-    private TicketManager ticketManager;
+    private TicketSystem ticketSystem;
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
-        ticketManager = new TicketManager();
+        ticketSystem = new TicketSystem();
         FlightCollection.flights = new ArrayList<>();
         TicketCollection.tickets = new ArrayList<>();
         System.setOut(new PrintStream(outputStream));
@@ -28,7 +28,7 @@ public class TicketManagerTest {
     @DisplayName("Test showTicket method when ticket information is null")
     public void testShowTicketWithNullTicketInfo() {
 
-        ticketManager.showTicket();
+        ticketSystem.showTicket();
 
         String output = outputStream.toString();
         assertTrue(output.contains("No ticket information available."));
@@ -41,7 +41,7 @@ public class TicketManagerTest {
         FlightCollection.flights = new ArrayList<>();
         String simulatedInput = "0\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        ticketManager.chooseAndBuyTicket("Melbourne", "Sydney");
+        ticketSystem.chooseAndBuyTicket("Melbourne", "Sydney");
 
         String output = outputStream.toString();
         assertTrue(output.contains("No direct flights found"));
