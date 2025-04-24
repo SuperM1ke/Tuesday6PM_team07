@@ -8,13 +8,13 @@ public class Ticket
     private boolean status; //indicates status of ticket: if it is bought by someone or not
     Passenger passenger;
 
-    public Ticket(int ticket_id,int price, Flight flight, boolean classVip, Passenger passenger)
+    public Ticket(int ticket_id,int price, Flight flight, boolean classVip, boolean status, Passenger passenger)
     {
         this.ticket_id=ticket_id;
         this.price = price;
         this.flight = flight;
         this.classVip = classVip;
-        this.status = false;
+        this.status = status;
         this.passenger=passenger;
     }
 
@@ -97,4 +97,6 @@ public class Ticket
                 getFlight() +'\n'+ "Vip status=" + getClassVip() + '\n' +
                 getPassenger()+'\n'+ "Ticket was purchased=" + ticketStatus() + "\n}";
     }
+
+
 }
