@@ -53,8 +53,7 @@ public class TicketSystemTest {
 
         TicketCollection.tickets = new ArrayList<>();
 
-
-        ticketSystem.buyDirectTicket(999);
+        ticketManager.buyDirectTicket(999);
         String output = outputStream.toString();
         assertTrue(output.contains("This ticket does not exist"));
     }
