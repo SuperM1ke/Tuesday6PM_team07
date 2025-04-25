@@ -78,8 +78,8 @@ public class TicketCollection {
 				throw new IllegalArgumentException("Airplane economy seats cannot be negative");
 			}
 			// validate airplane crew seat number
-			if (airplane.getCrewSitsNumber() < 0) {
-				throw new IllegalArgumentException("Airplane crew seats cannot be negative");
+			if (airplane.getCrewSitsNumber() < 1) {
+				throw new IllegalArgumentException("Airplane must have crew seats");
 			}
 
 			// validate if ticket status matches passenger information
@@ -87,7 +87,7 @@ public class TicketCollection {
 				throw new IllegalArgumentException("Sold tickets must have passenger information");
 			}
 			if (!ticket.ticketStatus() && ticket.getPassenger() != null) {
-				throw new IllegalArgumentException("Unold tickets shouldn't have passenger information");
+				throw new IllegalArgumentException("Unsold tickets shouldn't have passenger information");
 			}
 
 		}
@@ -104,7 +104,7 @@ public class TicketCollection {
 		System.out.println("Available tickets:");
 
 		for (Ticket ticket : tickets) {
-			if (!ticket.ticketStatus()) {  // 只显示未售出的票据
+			if (!ticket.ticketStatus()) {
 				System.out.println("Ticket ID: " + ticket.getTicket_id());
 				System.out.println("Price: " + ticket.getPrice());
 				System.out.println("Flight: " + ticket.getFlight().getCode() +
