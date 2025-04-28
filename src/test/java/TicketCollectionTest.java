@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -13,24 +14,14 @@ import java.util.ArrayList;
 public class TicketCollectionTest {
 
     private Airplane validAirplane;
-    private Airplane invalidAirplane1;
-    private Airplane invalidAirplane2;
     private Flight validFlight1;
     private Flight validFlight2;
-    private Flight invalidFlight1;
-    private Flight invalidFlight2;
     private Passenger validPassenger;
-    private Passenger invalidPassenger;
-
 
     @BeforeEach
     public void setUp() {
 
         validAirplane = new Airplane(1, "Boeing 737",
-                20, 150, 6);
-        invalidAirplane1 = new Airplane(-1, "Boeing 737",
-                -20, -150, -6);
-        invalidAirplane2 = new Airplane(1, null,
                 20, 150, 6);
 
         LocalDateTime dateFrom = LocalDateTime.of(2025, 3, 22, 11, 2, 0, 0);
@@ -42,16 +33,10 @@ public class TicketCollectionTest {
                 "Jetstar Airlines", timestampFrom, timestampTo, validAirplane);
         validFlight2 = new Flight(2, "Melbourne", "Sydney", "QWE123",
                 "Jetstar Airlines", timestampFrom, timestampTo, validAirplane);
-        invalidFlight1 = new Flight(12, null, null, "",
-                "", null, null, invalidAirplane2);
-        invalidFlight2 = new Flight(-1, "Melbourne", "Sydney", "ASD123",
-                "Jetstar", timestampFrom, timestampTo, invalidAirplane1);
 
         validPassenger = new Passenger("Jack", "Green", 23, "Man",
                 "test@example.com", "1234567890", "AS213412",
                 "1234123412341234", 231);
-        invalidPassenger = new Passenger("", "", -23, "",
-                "", "", "", "", -231);
 
         TicketCollection.tickets = new ArrayList<>();
     }
@@ -112,9 +97,11 @@ public class TicketCollectionTest {
     @DisplayName("Test adding tickets with invalid flights")
     public void testAddTicketsWithInvalidflights() {
         ArrayList<Ticket> tickets = new ArrayList<>();
+        Flight flight = mock(Flight.class);
+        when(flight.getFlightID()).thenReturn(-1);
 
-        Ticket invalidTicket1 = new Ticket(1, 100, invalidFlight1, false, false, null);
-        Ticket invalidTicket2 = new Ticket(1, 100, invalidFlight2, false, false, null);
+        Ticket invalidTicket1 = new Ticket(1, 100, flight, false, false, null);
+        Ticket invalidTicket2 = new Ticket(1, 100, flight, false, false, null);
         Ticket invalidTicket3 = new Ticket(1, 100, null, false, false, null);
 
         tickets.add(invalidTicket1);
@@ -130,9 +117,10 @@ public class TicketCollectionTest {
     @DisplayName("Test adding tickets with inconsistent status and passenger")
     public void testAddTicketsWithInconsistentStatusAndPassenger() {
         ArrayList<Ticket> tickets = new ArrayList<>();
+        Passenger passenger = mock(Passenger.class);
 
         Ticket inconsistentTicket1 = new Ticket(1, 100, validFlight1, false, true, null);
-        Ticket inconsistentTicket2 = new Ticket(1, 100, validFlight1, false, false, invalidPassenger);
+        Ticket inconsistentTicket2 = new Ticket(1, 100, validFlight1, false, false, passenger);
 
         tickets.add(inconsistentTicket1);
         tickets.add(inconsistentTicket2);

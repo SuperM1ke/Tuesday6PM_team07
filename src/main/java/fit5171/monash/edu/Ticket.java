@@ -80,7 +80,7 @@ public class Ticket
 
     public void serviceTax(){
         this.price *= 1.12;
-    } //12% service tax
+    }                   //12% service tax
 
     public Passenger getPassenger() {
         return passenger;

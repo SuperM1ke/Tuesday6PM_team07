@@ -31,6 +31,18 @@ public class TicketSystem {
     }
 
     public void chooseAndBuyTicket(String departureCity, String destinationCity) throws Exception {
+        // validate departure city and destination city
+        if (departureCity == null || departureCity.trim().isEmpty()
+                || destinationCity == null || destinationCity.trim().isEmpty()) {
+            throw new IllegalArgumentException("Departure and destination city are required");
+        }
+        if (!departureCity.matches("^[A-Za-z ]+$") || !destinationCity.matches("^[A-Za-z ]+$")) {
+            throw new IllegalArgumentException("Departure and destination city contains alphanumeric characters only");
+        }
+        if (departureCity.trim().length() > 20 || destinationCity.trim().length() > 20 ){
+            throw new IllegalArgumentException("City name cannot be longer than 20 characters");
+        }
+
         int counter = 0;
         int firstFlightId = 0;
         int secondFlightId = 0;
@@ -142,6 +154,7 @@ public class TicketSystem {
             }
         }
     }
+
     private void collectPassengerInfo() {
         in.nextLine(); // Clear buffer
 
@@ -175,8 +188,8 @@ public class TicketSystem {
         passenger.setPassport(passportNumber);
     }
 
-    private void processPayment() {
-        System.out.println("Your bill: " + ticket.getPrice() + "\n");
+    private void processPayment(int price) {
+        System.out.println("Your bill: " + price + "\n");
 
         in.nextLine(); // Clear buffer
         System.out.println("Enter your card number:");
@@ -185,6 +198,7 @@ public class TicketSystem {
 
         System.out.println("Enter your security code:");
         int securityCode = in.nextInt();
+        in.nextLine(); // Clear buffer
         passenger.setSecurityCode(securityCode);
     }
 
@@ -195,6 +209,10 @@ public class TicketSystem {
         // Validate ticket
         if (selectedTicket == null) {
             System.out.println("This ticket does not exist.");
+            return;
+        }
+        if (selectedTicket.ticketStatus()){
+            System.out.println("This ticket have already been sold.");
             return;
         }
 
@@ -227,6 +245,10 @@ public class TicketSystem {
                 return;
             }
 
+            int totalPrice = selectedTicket.getPrice();
+            // Process payment
+            processPayment(totalPrice);
+
             // Update ticket
             this.ticket = selectedTicket;
             ticket.setPassenger(passenger);
@@ -239,9 +261,6 @@ public class TicketSystem {
             } else {
                 airplane.setEconomySitsNumber(airplane.getEconomySitsNumber() - 1);
             }
-
-            // Process payment
-            processPayment();
 
             System.out.println("Ticket purchased successfully!");
 
@@ -262,6 +281,14 @@ public class TicketSystem {
         // Validate tickets
         if (firstTicket == null || secondTicket == null) {
             System.out.println("One or both tickets do not exist.");
+            return;
+        }
+        if (firstTicket.ticketStatus()){
+            System.out.println("The first ticket have already been sold.");
+            return;
+        }
+        if (secondTicket.ticketStatus()){
+            System.out.println("The second ticket have already been sold.");
             return;
         }
 
@@ -315,11 +342,11 @@ public class TicketSystem {
             }
 
             // Set combined price for reference (though we keep both tickets separate)
-            double totalPrice = firstTicket.getPrice() + secondTicket.getPrice();
+            int totalPrice = firstTicket.getPrice() + secondTicket.getPrice();
             System.out.println("Your total bill: " + totalPrice + "\n");
 
             // Process payment
-            processPayment();
+            processPayment(totalPrice);
 
             // Store the first ticket as the main reference ticket
             this.ticket = firstTicket;
