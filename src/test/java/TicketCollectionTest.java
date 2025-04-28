@@ -245,7 +245,4 @@ public class TicketCollectionTest {
 
         assertNull(TicketCollection.getTicketsForFlight(1));
     }
-
-
-
 }
